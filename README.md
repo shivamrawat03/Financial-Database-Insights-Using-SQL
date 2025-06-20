@@ -7,7 +7,7 @@ This project demonstrates the implementation of a  Financial Database Insights u
 
 ![image](https://github.com/user-attachments/assets/6a42b9ae-7402-4200-ac95-cd48db294098)
 
-## <u>Objective<u>
+## Objective
 The objective of this project is to explore and analyze a real-world financial (banking) relational database using SQL. This includes:
 
 - Designing a clear ER (Entity-Relationship) model
@@ -20,3 +20,11 @@ The objective of this project is to explore and analyze a real-world financial (
 
 - Practicing advanced SQL techniques like CTEs, aggregations, window functions, and multi-step query logic
 
+## `Project Structure`
+
+### Database ER daigram Setup
+
+![ER Daigram](https://github.com/user-attachments/assets/2fb64637-3b2c-4d92-b88b-09ff6ce228b9)
+
+- **Database Creation** : Created a database named `finance`.
+- **Table Creation** : Created tables for account, card, district, client, loan, trans, disp, order. Each table includes relevant columns and relationships.
