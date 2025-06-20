@@ -12,6 +12,8 @@ The objective of this project is to explore and analyze a real-world financial (
 
 - Designing a clear ER (Entity-Relationship) model
 
+- Database Setup by Creating and populating the database with tables for account, card, district, client, loan, trans, disp, order.
+
 - Cleaning and structuring data with foreign key constraints
 
 - Writing SQL queries to extract insights on customers, accounts, transactions, loans, and defaults
@@ -22,9 +24,13 @@ The objective of this project is to explore and analyze a real-world financial (
 
 ## `Project Structure`
 
-### Database ER daigram Setup
+###  Database ER daigram 
 
 ![ER Daigram](https://github.com/user-attachments/assets/2fb64637-3b2c-4d92-b88b-09ff6ce228b9)
 
+
+###  Database Setup
 - **Database Creation** : Created a database named `finance`.
-- **Table Creation** : Created tables for account, card, district, client, loan, trans, disp, order. Each table includes relevant columns and relationships.
+- **Table Creation** : Created tables for account, card, district, client, loan, trans, disp, order.
+
+  <pre> ```python def hello(): print("Hello, Shivam!") ``` </pre>
