@@ -6,3 +6,17 @@ This project demonstrates the implementation of a  Financial Database Insights u
 
 
 ![image](https://github.com/user-attachments/assets/6a42b9ae-7402-4200-ac95-cd48db294098)
+
+## <u>Objective<u>
+The objective of this project is to explore and analyze a real-world financial (banking) relational database using SQL. This includes:
+
+- Designing a clear ER (Entity-Relationship) model
+
+- Cleaning and structuring data with foreign key constraints
+
+- Writing SQL queries to extract insights on customers, accounts, transactions, loans, and defaults
+
+- Identifying patterns in financial behavior such as withdrawal frequency, loan default rates, and account activity
+
+- Practicing advanced SQL techniques like CTEs, aggregations, window functions, and multi-step query logic
+
