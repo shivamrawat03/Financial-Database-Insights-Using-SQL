@@ -1,4 +1,4 @@
-# Financial-Database-Insights-Using-SQL
+![image](https://github.com/user-attachments/assets/df769fdc-24bb-475a-b02a-b8244255d3a4)# Financial-Database-Insights-Using-SQL
 A real-world SQL project exploring a relational banking dataset using MySQL. Includes ER modeling, data cleaning, analytical queries, and insights on customer behavior, loans, and transactions.
 
 ## Project Overview
@@ -33,10 +33,11 @@ The objective of this project is to explore and analyze a real-world financial (
 - **Database Creation** : Created a database named `finance`.
 - **Table Creation** : Created tables for account, card, district, client, loan, trans, disp, order.
 
-  <pre> CREATE DATABASE IF NOT EXISTS Finance;
+
+```sql
+CREATE DATABASE IF NOT EXISTS Finance;
 
 USE Finance;
-
 
 
 CREATE TABLE account (
@@ -124,4 +125,4 @@ CREATE TABLE trans (
      bank_code VARCHAR(20),
      target_account INT
 );
-     </pre>
+    
