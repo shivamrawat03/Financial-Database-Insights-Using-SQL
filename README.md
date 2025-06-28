@@ -40,11 +40,13 @@ CREATE DATABASE IF NOT EXISTS Finance;
 USE Finance;
 
 
+
 CREATE TABLE account (
 	account_id  INTEGER PRIMARY KEY,
 	district_id  INTEGER,
 	fee_frequency VARCHAR(30),
 	created_date DATE
+    -- FOREIGN KEY (district_id) REFERENCES  district(district_id)
 );
 
 CREATE TABLE card (
@@ -52,6 +54,7 @@ CREATE TABLE card (
     disp_id INT,
     card_type VARCHAR(20),   -- e.g., classic, gold
     issued_date DATE
+    -- FOREIGN KEY (disp_id) REFERENCES disp(disp_id)
 );
 
 CREATE TABLE district (
@@ -78,6 +81,7 @@ CREATE TABLE client (
     gender CHAR(1),
     birth_date DATE,
     district_id INT
+    -- FOREIGN KEY (district_id) REFERENCES district(district_id)
 );
 
 CREATE TABLE disp (
@@ -85,14 +89,10 @@ CREATE TABLE disp (
     client_id INT,
     account_id INT,
     disp_type ENUM('OWNER','DISPONENT')
+    -- FOREIGN KEY (client_id) REFERENCES client(client_id),
+    -- FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
 
-CREATE TABLE card (
-	card_id INT PRIMARY KEY,
-    disp_id INT,
-    card_type VARCHAR(20),
-    issued_date DATE
-);
 
 CREATE TABLE orders (
 	order_id INT PRIMARY KEY,
@@ -101,6 +101,7 @@ CREATE TABLE orders (
     account_to INT,
 	amount FLOAT,
     payment_type VARCHAR(20)  -- k_symbol,transaction purpose
+    -- FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
 
 CREATE TABLE loan (
@@ -111,6 +112,7 @@ CREATE TABLE loan (
     duration INT,  -- in months
     payments FLOAT,  -- monthly payment (emi)
     loan_status CHAR(1)
+    -- FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
 
 CREATE TABLE trans (
@@ -124,14 +126,15 @@ CREATE TABLE trans (
      payment_type VARCHAR(20), -- k_symbol
      bank_code VARCHAR(20),
      target_account INT
+     -- FOREIGN KEY (account_id) REFERENCES account(account_id)
 );
-
-
+---
 
 
 ### Updating
 
 ```sql
+use finance;
 set sql_safe_updates = 0;
 UPDATE orders
 SET payment_type = CASE
@@ -170,15 +173,6 @@ SET payment_type = CASE
     ELSE payment_type
 END;
 
--- UPDATE trans
--- SET processing_method = CASE
--- 	WHEN processing_method = 'VKLAD' THEN 'Deposit'
---     WHEN processing_method = 'PREVOD Z UCTU' THEN 'Transfer In'
---     WHEN processing_method = 'PREVOD NA UCET' THEN 'Transfer Out'
---     WHEN processing_method = 'VYBER' THEN 'Withdrawal'
---     ELSE processing_method
--- END;
- 
 
 UPDATE trans
 SET trans_type = 'Withdrawal'
@@ -191,8 +185,8 @@ DROP COLUMN processing_method;
 UPDATE trans
 SET payment_type = 'No Detail'
 WHERE payment_type = '' OR payment_type IS NULL;
-select * from trans;
 
+---
 
 ### Updating Constraints
 
@@ -201,7 +195,6 @@ select * from trans;
 ALTER TABLE orders
 ADD CONSTRAINT fk_orders_account
 FOREIGN KEY (account_id) REFERENCES account(account_id);
-
 
 -- For 'loan' table
 ALTER TABLE loan
@@ -227,7 +220,17 @@ FOREIGN KEY (client_id) REFERENCES client(client_id),
 ADD CONSTRAINT fk_disp_account
 FOREIGN KEY (account_id) REFERENCES account(account_id);
 
-
 ALTER TABLE account
 ADD CONSTRAINT fk_account_district
 FOREIGN KEY (district_id) REFERENCES district(district_id);
+
+DELETE FROM card
+WHERE disp_id NOT IN (
+    SELECT disp_id FROM disp
+);
+
+DELETE FROM loan
+WHERE account_id NOT IN (
+    SELECT account_id FROM account
+);
+---
